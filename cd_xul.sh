@@ -8,10 +8,20 @@ save_dir_history()
 	fi
 
 	# no dup
-	a=$1
-	dup_str=${a//\//\\\/}
+	dup_str=${$1//\//\\\/}
+	dup_str=`escape_all_regex_char $dup_str`
 	sed -i "/^${dup_str}$/d" ~/system_config/.dir_history
 	echo $1 >> ~/system_config/.dir_history
+}
+
+
+# 转义所有正则字符
+escape_all_regex_char() {
+	dup_str=$1
+	for char in '$^*+[]{}-()|.'; do
+		dup_str=${dup_str//\\${char}/\\\${char}
+	done
+	return $dup_str
 }
 
 
@@ -108,6 +118,12 @@ then
 fi
 
 i=0
+
+if test ! -e ~/system_config/.dir_history; then
+	builtin cd $@
+	return $?
+fi
+
 for line in `tac ~/system_config/.dir_history`
 do
 	match_line $@ $line
@@ -123,7 +139,7 @@ done
 if test ${#output_line_array[@]} -eq 0
 then
 	builtin cd $@
-	return 0
+	return $?
 fi
 
 #set -x

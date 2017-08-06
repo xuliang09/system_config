@@ -1,0 +1,5 @@
+.bash_history_bak
+.dir_history
+*.swp
+test*
+

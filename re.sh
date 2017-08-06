@@ -6,6 +6,7 @@
 # filter again or select one
 # line to screen
 
+. escape_all_regex_char.sh
 
 import_dir_history()
 {
@@ -15,9 +16,10 @@ import_dir_history()
 	fi
 
 	# no dup
-	tail -n 50 ~/.bash_history | while read line
+	tail -n 50 ~/.bash_history | head -n 49 | while read line
 	do
 		dup_str=${line//\//\\\/}
+		dup_str=`escape_all_regex_char "$dup_str"`
 		sed -i "/^${dup_str}$/d" ~/system_config/.bash_history_bak
 		if test $? -eq 0; then
 			echo "$line" >> ~/system_config/.bash_history_bak
@@ -108,7 +110,7 @@ display_all() {
 
 choose_to_display_or_not() {
 	if test ${#output_line_array[@]} -gt 20; then
-		echo -e "total found: ${#output_line_array[@]}, display all? (y/N)\c"
+		echo -e "total found: ${#output_line_array[@]}, display all? (y/N) \c"
 		read select_op
 		if [[ $select_op == '' || $select_op == 'n' || $select_op == 'N' ]]; then
 			return 1
