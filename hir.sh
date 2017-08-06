@@ -10,12 +10,13 @@ prev_num=`wc -l < ~/system_config/.bash_history_bak`
 
 while read line
 do
-	echo $line
-	dup_str=${line//\//\\\/}
+	dup_str=${line}
 	dup_str=`escape_all_regex_char "$dup_str"`
 	sed -i "/^${dup_str}$/d" ~/system_config/.bash_history_bak
 	if test $? -eq 0; then
 		echo "$line" >> ~/system_config/.bash_history_bak
+	else
+		echo $line
 	fi
 done < ~/.bash_history
 
