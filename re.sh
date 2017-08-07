@@ -6,7 +6,7 @@
 # filter again or select one
 # line to screen
 
-. escape_all_regex_char.sh
+. ~/system_config/escape_all_regex_char.sh
 
 import_dir_history()
 {
@@ -18,7 +18,7 @@ import_dir_history()
 	# no dup
 	tail -n 50 ~/.bash_history | head -n 49 | while read line
 	do
-		dup_str=${line//\//\\\/}
+		dup_str=${line}
 		dup_str=`escape_all_regex_char "$dup_str"`
 		sed -i "/^${dup_str}$/d" ~/system_config/.bash_history_bak
 		if test $? -eq 0; then

@@ -11,3 +11,4 @@ if test $? -ne 0; then
 fi
 
 sudo apt install xclip -y
+sudo apt install nautilus -y

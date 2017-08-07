@@ -1,5 +1,7 @@
 #!/bin/bash
 
+. ~/system_config/escape_all_regex_char.sh
+
 save_dir_history()
 {
 	if test ! -e ~/system_config/.dir_history
@@ -8,20 +10,10 @@ save_dir_history()
 	fi
 
 	# no dup
-	dup_str=${$1//\//\\\/}
-	dup_str=`escape_all_regex_char $dup_str`
-	sed -i "/^${dup_str}$/d" ~/system_config/.dir_history
-	echo $1 >> ~/system_config/.dir_history
-}
-
-
-# 转义所有正则字符
-escape_all_regex_char() {
 	dup_str=$1
-	for char in '$^*+[]{}-()|.'; do
-		dup_str=${dup_str//\\${char}/\\\${char}
-	done
-	return $dup_str
+	dup_str=`escape_all_regex_char "$dup_str"`
+	sed -i "/^${dup_str}$/d" ~/system_config/.dir_history
+	echo "$1" >> ~/system_config/.dir_history
 }
 
 

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-. escape_all_regex_char.sh
+. ~/system_config/escape_all_regex_char.sh
 
 if test ! -e ~/system_config/.bash_history_bak; then
 	touch ~/system_config/.bash_history_bak
