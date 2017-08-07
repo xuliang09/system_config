@@ -4,6 +4,7 @@ alias re='. ~/system_config/re.sh'
 alias hir='. ~/system_config/hir.sh'
 alias of='. ~/system_config/of.sh'
 alias putclip='. ~/system_config/putclip.sh'
+alias up='. ~/system_config/up.sh'
 
 
 alias cd-='cd ~/xul/java_workspace/com.kgtdata.qa.joyoung'
