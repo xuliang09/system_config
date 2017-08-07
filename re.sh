@@ -10,9 +10,9 @@
 
 import_dir_history()
 {
-	if test ! -e ~/system_config/.bash_history_bak
+	if test ! -e ~/system_config/.cache/.bash_history_bak
 	then
-		touch ~/system_config/.bash_history_bak
+		touch ~/system_config/.cache/.bash_history_bak
 	fi
 
 	# no dup
@@ -20,9 +20,9 @@ import_dir_history()
 	do
 		dup_str=${line}
 		dup_str=`escape_all_regex_char "$dup_str"`
-		sed -i "/^${dup_str}$/d" ~/system_config/.bash_history_bak
+		sed -i "/^${dup_str}$/d" ~/system_config/.cache/.bash_history_bak
 		if test $? -eq 0; then
-			echo "$line" >> ~/system_config/.bash_history_bak
+			echo "$line" >> ~/system_config/.cache/.bash_history_bak
 		fi
 	done
 }
@@ -144,7 +144,7 @@ else
 			output_line_array[i]=$line
 			let i++
 		fi
-	done < ~/system_config/.bash_history_bak
+	done < ~/system_config/.cache/.bash_history_bak
 
 	choose_to_display_or_not
 	if test ! $? -eq 0; then

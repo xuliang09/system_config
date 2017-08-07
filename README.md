@@ -1,7 +1,22 @@
 # system_config
+### Description
+
 system configuration，ubuntu based
 
 
+
+### How to install
+
+download system_config, then
+
+1. cd system_config
+2. sudo ./intall.sh
+
+
+
+
+
+### How to use
 
 1. How to use cd_xul.sh
 
@@ -32,4 +47,10 @@ $ re git clone acc
 => 
 ```
 
-输入相应的序号之后，序号后面的命令就被送到系统剪贴板
+After you enter the serial number serial number behind the order was sent
+
+
+
+### Disclaimer
+
+Refer to the work of master: https://github.com/baohaojun/system-config

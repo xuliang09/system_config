@@ -4,16 +4,16 @@
 
 save_dir_history()
 {
-	if test ! -e ~/system_config/.dir_history
+	if test ! -e ~/system_config/.cache/.dir_history
 	then
-		touch ~/system_config/.dir_history
+		touch ~/system_config/.cache/.dir_history
 	fi
 
 	# no dup
 	dup_str=$1
 	dup_str=`escape_all_regex_char "$dup_str"`
-	sed -i "/^${dup_str}$/d" ~/system_config/.dir_history
-	echo "$1" >> ~/system_config/.dir_history
+	sed -i "/^${dup_str}$/d" ~/system_config/.cache/.dir_history
+	echo "$1" >> ~/system_config/.cache/.dir_history
 }
 
 
@@ -111,12 +111,12 @@ fi
 
 i=0
 
-if test ! -e ~/system_config/.dir_history; then
+if test ! -e ~/system_config/.cache/.dir_history; then
 	builtin cd $@
 	return $?
 fi
 
-for line in `tac ~/system_config/.dir_history`
+for line in `tac ~/system_config/.cache/.dir_history`
 do
 	match_line $@ $line
 	if [ $? -eq 0 ]
