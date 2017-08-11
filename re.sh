@@ -57,7 +57,7 @@ select_output_line()
 	#set -x
 	if [[ "$select_number" == '' ]]
 	then
-		select_number=0
+		select_number=`expr ${#output_line_array[@]} - 1`
 	fi
 	#set +x
 
@@ -102,7 +102,7 @@ select_output_line()
 display_all() {
 	cnt=0
 	for((i=$1-1;i>=0;i--)); do
-		echo ${cnt}\) ${output_line_array[i]}
+		echo ${cnt}\) ${output_line_array[$i]}
 		let cnt++
 	done
 }
@@ -126,13 +126,24 @@ choose_to_display_or_not() {
 }
 
 
+is_existed_in_array() {
+	output_line_array_size=${#output_line_array[@]}
+	for((i=0;i<output_line_array_size;i++)); do
+		if [[ ${output_line_array[$i]} == "$1" ]]; then
+			return 0
+		fi
+	done
+	return 1
+}
+
+
 cmd_para_num="$#"
 output_line_array=()
 
 if [ $cmd_para_num -eq 0 ]; then
 	return 0
 else
-	import_dir_history
+	# import_dir_history
 	i=0
 	while read line
 	do
@@ -141,10 +152,13 @@ else
 		if [ $? -eq 0 ]
 		then
 			line=${line//%#/ }
-			output_line_array[i]=$line
-			let i++
+			is_existed_in_array "$line"
+			if [[ "$?" -ne 0 ]]; then
+				output_line_array[$i]=$line
+				let i++
+			fi
 		fi
-	done < ~/system_config/.cache/.bash_history_bak
+	done < ~/.bash_history
 
 	choose_to_display_or_not
 	if test ! $? -eq 0; then
