@@ -5,10 +5,8 @@ alias hir='. ~/system_config/hir.sh'
 alias of='. ~/system_config/of.sh'
 alias putclip='. ~/system_config/putclip.sh'
 alias up='. ~/system_config/up.sh'
+alias s='. ~/system_config/s.sh'
 
-
-alias cd-='cd ~/xul/java_workspace/com.kgtdata.qa.joyoung'
-alias cds='cd /home/user/下载/system-config-master'
 
 alias gst='git status'
 alias gad='git add'
