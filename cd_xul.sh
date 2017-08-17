@@ -80,6 +80,10 @@ select_output_line()
 		then
 			echo 'cd: found no path'
 			return 0
+		elif test ${#output_line_array[@]} -eq 1
+    then
+        builtin cd "${output_line_array[0]}"
+        return 0
 		fi
 		#set +x
 		select_output_line
