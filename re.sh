@@ -66,7 +66,8 @@ select_output_line()
 	isdigit_state=$?
 	if [[ $isdigit_state -eq 0 && $select_number -lt $output_line_array_num ]]
 	then
-		echo -e "${output_line_array[$select_number]}\c" | xclip -selection clipboard
+      let real_select_number=${#output_line_array[@]}-1-${select_number}
+		echo -e "${output_line_array[$real_select_number]}\c" | xclip -selection clipboard
 	elif [[ $isdigit_state -ne 0 ]]
 	then
 		temp_output_line_array=()
