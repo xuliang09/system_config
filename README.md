@@ -11,6 +11,7 @@
 4. sudo ./intall.sh
 5. source ~/.bashrc
   </br>
+
 **注意：**
 
 - 如果system_config中的部分命令与已有命令名称相同，可以在安装完后修改~/system_config/.bashrc中的冲突命令的名称，修改完之后，执行source ~/.bashrc
