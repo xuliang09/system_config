@@ -4,6 +4,8 @@
 
 
 
+
+
 ## Install
 
 1. cd ~
@@ -15,9 +17,11 @@
 
 
 
-   **注意：**
+**注意：**
 
 - 如果system_config中的部分命令与已有命令名称相同，可以在安装完后修改~/system_config/.bashrc中的冲突命令的名称，修改完之后，执行source ~/.bashrc
+
+
 
 
 
@@ -26,6 +30,8 @@
 ## Features
 
 扩展或新增的命令集合：cd、of、putclip、up、re、s
+
+
 
 
 
@@ -107,6 +113,8 @@ of命令同样支持支持多个词语过滤.dir_history中的历史路径，.di
 
 
 
+
+
 4. s
 
 
@@ -131,9 +139,13 @@ s命令在打印完候选项之后，同样可以输入词语继续过滤或者�
 
 
 
+
+
 ## Disclaimer
 
 参考了大师的作品：https://github.com/baohaojun/system-config
+
+
 
 
 
