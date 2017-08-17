@@ -1,43 +1,29 @@
 ## Introduction
 
 根据个人工作中的需求对命令行的进行了一些扩展（包含添加新命令和改造已有命令），本项目**基于ubuntu和ubuntu的衍生版本**（暂不支持RedHat系列以及Mac OS），并且扩展只针对**bash**（暂不支持其他shell）
-
-
-
-
+</br></br>
 
 ## Install
 
 1. cd ~
-2. git clone git@github.com:PowerfulSpider/system_config.git
+2. git clone https://github.com/PowerfulSpider/system_config.git
 3. cd system_config
 4. sudo ./intall.sh
 5. source ~/.bashrc
-
-
-
-
+  </br>
 **注意：**
 
 - 如果system_config中的部分命令与已有命令名称相同，可以在安装完后修改~/system_config/.bashrc中的冲突命令的名称，修改完之后，执行source ~/.bashrc
-
-
-
-
-
-
+  </br></br>
 
 ## Features
 
 扩展或新增的命令集合：cd、of、putclip、up、re、s
-
-
-
-
+</br></br>
 
 ## Documentation
 
-1. cd
+1. **cd**
 
 cd命令会创建一个文件.dir_history，在你进入任何一个目录的时候，该目录的绝命路径将会被存储到.dir_history中，供下次执行cd命令时使用。
 
@@ -60,12 +46,9 @@ $
 
 - 如果序号为0的路径就是你想进入的路径，直接*Enter*就可以，不需要输入0
 - 路径会根据使用记录自动排序，越近访问的越靠前
+  </br>
 
-
-
-
-
-2. re
+2. **re**
 
 re是查找历史命名记录的命令，其使用方法和cd命令基本相同。
 
@@ -86,12 +69,9 @@ re命令同样支持多个词语过滤.bash_history的历史命令，.bash_histo
 
 - 如果序号为0的历史命令就是你需要的历史命令，直接*Enter*就可以，不需要输入0
 - 历史命令会根据使用记录自动排序，越近访问的越靠前
+  </br>
 
-
-
-
-
-3. of
+3. **of**
 
 of命令是在命令行中打开文件管理器的命令，其使用方法和cd命令基本相同。
 
@@ -110,12 +90,9 @@ of命令同样支持支持多个词语过滤.dir_history中的历史路径，.di
 
 - 如果序号为0的路径就是你想打开的，直接*Enter*就可以，不需要输入0
 - 路径会根据使用记录自动排序，越近访问的越靠前
+  </br>
 
-
-
-
-
-4. s
+4. *s*
 
 
 s命令是在终端中用firefox搜索的命令
@@ -135,18 +112,13 @@ s命令在打印完候选项之后，同样可以输入词语继续过滤或者�
 **注意：**
 
 - 如果序号为0的候选项就是你想要使用的搜索引擎，直接*Enter*就可以，不需要输入0
-
-
-
-
+  </br></br>
 
 
 ## Disclaimer
 
 参考了大师的作品：https://github.com/baohaojun/system-config
-
-
-
+</br></br>
 
 
 ## License
