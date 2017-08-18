@@ -114,6 +114,21 @@ s命令在打印完候选项之后，同样可以输入词语继续过滤或者�
 
 - 如果序号为0的候选项就是你想要使用的搜索引擎，直接*Enter*就可以，不需要输入0
   </br></br>
+  
+5. **putclip**
+
+
+putclip命令是在终端中通过管道复制文本到系统剪贴板的命令
+
+```sh
+user@user-OptiPlex-3046:~/xul/java_workspace
+$ pwd|putclip
+user@user-OptiPlex-3046:~/xul/java_workspace
+$ cat text.txt|putclip
+```
+
+使用putclip命令之后，再粘贴，便可将先前放到系统剪贴板中的文本粘贴出来
+  </br></br>
 
 
 ## Disclaimer
