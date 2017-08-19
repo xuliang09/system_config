@@ -1,7 +1,8 @@
 #!/bin/bash
 
 search_engine_list=('https://www.bing.com/search?q=keyword'
-                    'https://www.baidu.com/s?wd=keyword')
+                    'https://www.baidu.com/s?wd=keyword'
+                    'https://github.com/search?utf8=✓&q=keyword')
 selected_engine_index=-1
 url=
 
@@ -16,8 +17,10 @@ function select_one_search_engine() {
 # substitute keyword with true "keyword"
 function substitute_engine_keyword() {
     keywords="$@"
-    selected_engine="${search_engine_list[$selected_engine_index]}"
-    url="${selected_engine//keyword/${keywords}}"
+    if [[ $selected_engine_index -ge 0 && $selected_engine_index -lt ${#search_engine_list[@]} ]]; then
+        selected_engine="${search_engine_list[$selected_engine_index]}"
+        url="${selected_engine//keyword/${keywords}}"
+    fi
 }
 
 
@@ -93,4 +96,6 @@ function match_line()
 
 select_one_search_engine
 substitute_engine_keyword "$@"
-firefox "${url}" &>/dev/null
+if [[ $url != '' ]]; then
+    firefox "${url}" &>/dev/null
+fi
