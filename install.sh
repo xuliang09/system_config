@@ -40,15 +40,7 @@ function zsh_do() {
 }
 
 
-check_current_sh
-state="$?"
-if [[ $state -eq 1 ]]; then
-    bash_do
-elif [[ $state -eq 2 ]]; then
-    zsh_do
-else
-    echo 'install.sh: unsupported shell'
-fi
+bash_do
 
 sudo apt install xclip -y
 sudo apt install nautilus -y
