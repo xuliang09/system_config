@@ -41,16 +41,28 @@ function zsh_do() {
 
 
 function install_vimrc() {
-    mv ~/.vim ~/.vim_bak
-    mv ~/.vimrc ~/.vimrc_bak
-    mkdir ~/.vim && mkdir ~/.vim.bundle
-    git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-    mv ~/system_config/.vimrc ~/.vimrc
+    if test ! -e ~/.vimrc; then
+        mv ~/system_config/.vimrc ~/.vimrc
+        mkdir ~/.vim && mkdir ~/.vim.bundle
+        git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+    fi
 }
 
 
 bash_do
 install_vimrc
 
+# software
 sudo apt install xclip -y
 sudo apt install nautilus -y
+
+# python lib
+sudo apt install python-pip
+sudo pip install --upgrade pip
+sudo pip install flake8
+sudo pip install autoflake
+sudo pip install yapf
+# install pylookup
+cd ~/.emacs.d/layers/+lang/python/local/pylookup/
+chmod +x pylookup.py
+sudo make download

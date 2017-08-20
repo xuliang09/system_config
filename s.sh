@@ -1,8 +1,8 @@
 #!/bin/bash
 
 search_engine_list=('https://www.bing.com/search?q=keyword'
-                    'https://www.baidu.com/s?wd=keyword'
-                    'https://github.com/search?utf8=✓&q=keyword')
+'https://www.baidu.com/s?wd=keyword'
+'https://github.com/search?utf8=✓&q=keyword')
 selected_engine_index=-1
 url=
 
@@ -32,8 +32,8 @@ function output_search_engine_list() {
 
 
 function select_output_line() {
-	  echo -e "=> \c"
-	  read select_number
+    echo -e "=> \c"
+    read select_number
 
     if [[ "$select_number" == '' ]]; then
         select_number=0
@@ -44,53 +44,53 @@ function select_output_line() {
     if [[ $isdigit_state -eq 0 && $select_number -lt ${#search_engine_list[@]} ]]; then
         selected_engine_index=$select_number
     elif [[ $isdigit_state -ne 0 ]]; then
-		    temp_search_engine_list=()
-		    for((i=0;i<${#search_engine_list[@]};i++));
-		    do
-			      line=${search_engine_list[$i]}
-			      match_line "$select_number" "$line"
+        temp_search_engine_list=()
+        for((i=0;i<${#search_engine_list[@]};i++));
+        do
+            line=${search_engine_list[$i]}
+            match_line "$select_number" "$line"
 
-			      if [ $? -eq 0 ]; then
-				        temp_search_engine_list[i]=$line
-			      fi
-		    done
-		    search_engine_list=("${temp_search_engine_list[@]}")
-		    if [[ ${#search_engine_list[@]} -eq 0 ]]; then
-			      echo 's: found no engine'
-			      return 0
+            if [ $? -eq 0 ]; then
+                temp_search_engine_list[i]=$line
+            fi
+        done
+        search_engine_list=("${temp_search_engine_list[@]}")
+        if [[ ${#search_engine_list[@]} -eq 0 ]]; then
+            echo 's: found no engine'
+            return 0
         elif [[ ${#search_engine_list[@]} -eq 1 ]]; then
             selected_engine_index=0
             return 0
-		    fi
+        fi
         output_search_engine_list
-		    select_output_line
-	  elif [[ $select_number -ge ${#search_engine_list[@]} ]]
-	  then
-		    echo 's: input incorrect!'
-	  else
-		    echo 's: select_output_line unexcepted case'
-	  fi
+        select_output_line
+    elif [[ $select_number -ge ${#search_engine_list[@]} ]]
+    then
+        echo 's: input incorrect!'
+    else
+        echo 's: select_output_line unexcepted case'
+    fi
 }
 
 
 function isdigit()
 {
-	  expr $1 + 1 &>/dev/null
-	  return $?
+    expr $1 + 1 &>/dev/null
+    return $?
 }
 
 
 function match_line()
 {
-	  line=${!#}
-	  for para in $@
-	  do
-		    if [[ ! "$line" =~ "$para" ]]
-		    then
-			      return 1
-		    fi
-	  done
-	  return 0
+    line=${!#}
+    for para in $@
+    do
+        if [[ ! "$line" =~ "$para" ]]
+        then
+            return 1
+        fi
+    done
+    return 0
 }
 
 

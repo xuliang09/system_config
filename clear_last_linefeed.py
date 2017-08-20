@@ -3,6 +3,6 @@
 
 import sys
 
-lines=sys.stdin.readlines()
-lines[len(lines)-1]=lines[len(lines)-1].rstrip()
+lines = sys.stdin.readlines()
+lines[len(lines) - 1] = lines[len(lines) - 1].rstrip()
 print(''.join(lines), end='')
