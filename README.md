@@ -55,13 +55,15 @@ re是查找历史命名记录的命令，其使用方法和cd命令基本相同�
 
 ```sh
 user@user-OptiPlex-3046:~/system_config
-$ re git clone acc
-0) re git clone acc
-1) git clone git@192.168.3.15:data-integration/com.kgtdata.access.client.git
-2) git clone 192.168.3.15:data-integration/com.kgtdata.access.client.git
-=> @
-0) git clone git@192.168.3.15:data-integration/com.kgtdata.access.client.git
-=> 
+$ re git clone
+0) git clone git@192.168.3.15:data-integration/com.kgtdata.qa.joyoung.git
+1) git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
+2) git clone https://github.com/pein0119/emacs.d.git
+3) git clone git@github.com:PowerfulSpider/system_config.git
+=> emacs
+0) git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
+1) git clone https://github.com/pein0119/emacs.d.git
+=> 1
 ```
 
 re命令同样支持多个词语过滤.bash_history的历史命令，.bash_history中的历史命令只有完全包含这些过滤词时才会被打印，在打印完之后，可以继续输入词语过滤或者直接输入序号（序号对应的历史命令将会被保存到系统剪贴板中）。
@@ -70,6 +72,7 @@ re命令同样支持多个词语过滤.bash_history的历史命令，.bash_histo
 
 - 如果序号为0的历史命令就是你需要的历史命令，直接*Enter*就可以，不需要输入0
 - 历史命令会根据使用记录自动排序，越近访问的越靠前
+- 历史命令中相同的命令不会重复打印
   </br></br>
 
 3. **of**
@@ -82,7 +85,9 @@ user@user-OptiPlex-3046:~$ of sys
 1) /home/user/system_config/test
 2) /home/user/system_config/.cache
 3) /sys
-=> 
+=> est
+0) /home/user/system_config/test
+=> 0
 ```
 
 of命令同样支持支持多个词语过滤.dir_history中的历史路径，.dir_history中的路径只有完全包含这些过滤词时才会被打印，在打印完之后，可以继续输入词语过滤或者直接输入序号打开序号对应路径的文件夹。
