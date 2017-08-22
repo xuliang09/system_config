@@ -42,15 +42,30 @@ function zsh_do() {
 
 function install_vimrc() {
     if test ! -e ~/.vimrc; then
-        mv ~/system_config/.vimrc ~/.vimrc
+        ln -s ~/system_config/.vimrc ~/.vimrc
         mkdir ~/.vim && mkdir ~/.vim.bundle
         git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
     fi
 }
 
 
+function install_spacemacs() {
+    if test ! -e ~/.emacs.d; then
+        ln -s ~/system_config/.spacemacs ~/.spacemacs
+        git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
+    fi
+}
+
+
 bash_do
+
+# vim
+sudo apt install vim
 install_vimrc
+
+# emacs
+sudo apt install emacs
+install_spacemacs
 
 # software
 sudo apt install xclip -y

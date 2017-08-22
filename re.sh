@@ -1,22 +1,6 @@
 #!/bin/bash
 
 
-function import_dir_history()
-{
-    if test ! -e ~/system_config/.cache/.bash_history_bak; then
-        touch ~/system_config/.cache/.bash_history_bak
-    fi
-
-    tail -n 50 ~/.bash_history | head -n 49 | while read line; do
-        local dup_str=`escape_all_regex_char "$line"`
-        sed -i "/^${dup_str}$/d" ~/system_config/.cache/.bash_history_bak
-        if test $? -eq 0; then
-            echo "$line" >> ~/system_config/.cache/.bash_history_bak
-        fi
-    done
-}
-
-
 function re_select_output_line()
 {
     echo -e "=> \c"
@@ -42,42 +26,48 @@ function re_select_output_line()
 }
 
 
-cmd_para_num="$#"
-output_line_array=()
+function main() {
+    local cmd_para_num="$#"
+    output_line_array=()
 
-if [ $cmd_para_num -eq 0 ]; then
-    return 0
-else
-    i=0
-    while read line; do
-        line=${line// /%#}
-        match_line $@ "$line"
-        if [ $? -eq 0 ]; then
-            line=${line//%#/ }
-            is_existed_in_array "$line"
-            if [[ "$?" -ne 0 ]]; then
-                output_line_array[$i]=$line
-                let i++
+    if [ $cmd_para_num -eq 0 ]; then
+        return 0
+    else
+        local i=0
+        local line
+        while read line; do
+            line=${line// /%#}
+            match_line $@ "$line"
+            if [ $? -eq 0 ]; then
+                line=${line//%#/ }
+                is_existed_in_array "$line"
+                if [[ "$?" -ne 0 ]]; then
+                    output_line_array[$i]=$line
+                    let i++
+                fi
             fi
+        done < ~/.bash_history
+
+        reverse_output_array
+
+        if test ! $? -eq 0; then
+            return 0
         fi
-    done < ~/.bash_history
+    fi
 
-    reverse_output_array
-
-    if test ! $? -eq 0; then
+    if [[ ${#output_line_array[@]} -eq 0 ]]; then
+        echo 're: found no history'
         return 0
     fi
-fi
 
-if [[ ${#output_line_array[@]} -eq 0 ]]; then
-    echo 're: found no history'
-    return 0
-fi
+    choose_to_display_or_not
+    if [[ $? -eq 0 ]]; then
+        display_output_line_array
+    else
+        return 1
+    fi
+    re_select_output_line
+}
 
-choose_to_display_or_not
-if [[ $? -eq 0 ]]; then
-    display_output_line_array
-else
-    return 1
-fi
-re_select_output_line
+
+main $@

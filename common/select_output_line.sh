@@ -3,6 +3,7 @@
 
 declare -a output_line_array
 
+
 # description: read user input, if input string then filter output_line_array
 #     else if input integer then return the array index of selected line
 # paras: para
@@ -22,10 +23,11 @@ function select_output_line() {
     elif [[ $isdigit_state -ne 0 ]]; then
         local temp_output_line_array=()
         local cnt=0
+        local i
         for((i=0;i<$output_line_array_size;i++)); do
             local line=${output_line_array[$i]}
             line=${line// /%#}
-            match_line "$select_output_line_para" "$line"
+            match_line $select_output_line_para "$line"
 
             if [ $? -eq 0 ]; then
                 line=${line//%#/ }
@@ -52,6 +54,7 @@ function select_output_line() {
 # paras:
 # return:
 function display_output_line_array() {
+    local i
     for((i=0;i<${#output_line_array[@]};i++)); do
         echo $i\) ${output_line_array[$i]}
     done
@@ -63,6 +66,7 @@ function display_output_line_array() {
 # return:
 function reverse_output_array() {
     local temp_output_line_array=()
+    local i
     for((i=${#output_line_array[@]}-1;i>=0;i--)); do
         temp_output_line_array[${#output_line_array[@]}-$i-1]=${output_line_array[$i]}
     done
@@ -75,6 +79,7 @@ function reverse_output_array() {
 # return: contains-0 other-1
 function is_existed_in_array() {
     output_line_array_size=${#output_line_array[@]}
+    local i
     for((i=0;i<$output_line_array_size;i++)); do
         if [[ ${output_line_array[$i]} == "$1" ]]; then
             return 0
@@ -88,9 +93,10 @@ function is_existed_in_array() {
 # paras:
 # return: display-0 other-1
 # TODO: this and re.sh
-choose_to_display_or_not() {
+function choose_to_display_or_not() {
     if test ${#output_line_array[@]} -gt 25; then
         echo -e "total found: ${#output_line_array[@]}, display all? (y/N) \c"
+        local select_op
         read select_op
         if [[ $select_op == '' || $select_op == 'n' || $select_op == 'N' ]]; then
             return 1

@@ -1,5 +1,5 @@
 # common shell script
-. ~/system_config/common/escape_all_regex_char.sh
+. ~/system_config/common/escape_regex_char.sh
 . ~/system_config/common/match_line.sh
 . ~/system_config/common/isdigit.sh
 . ~/system_config/common/select_output_line.sh

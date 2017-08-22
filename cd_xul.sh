@@ -7,7 +7,7 @@ function save_dir_history() {
         touch ~/system_config/.cache/.dir_history
     fi
 
-    local dup_str=`escape_all_regex_char "$1"`
+    local dup_str=`escape_regex_char "$1"`
     sed -i "/^${dup_str}$/d" ~/system_config/.cache/.dir_history
     echo "$1" >> ~/system_config/.cache/.dir_history
 }
@@ -38,42 +38,47 @@ function cd_select_output_line() {
 }
 
 
-output_line_array=()
+function main() {
+    output_line_array=()
 
-if [ $# -eq 0 ]; then
-    builtin cd ~
-    return 0
-elif [ $# -eq 1 ]; then
-    if test -e $1; then
-        builtin cd $1
-        save_dir_history `pwd`
+    if [ $# -eq 0 ]; then
+        builtin cd ~
         return 0
+    elif [ $# -eq 1 ]; then
+        if test -e $1; then
+            builtin cd $1
+            save_dir_history `pwd`
+            return 0
+        fi
     fi
-fi
 
-if test ! -e ~/system_config/.cache/.dir_history; then
-    builtin cd $@
-    return $?
-fi
-
-i=0
-for line in `tac ~/system_config/.cache/.dir_history`; do
-    match_line "$@" "$line"
-    if [ $? -eq 0 ]; then
-        output_line_array[$i]="$line"
-        let i++
+    if test ! -e ~/system_config/.cache/.dir_history; then
+        builtin cd $@
+        return $?
     fi
-done
 
-if test ${#output_line_array[@]} -eq 0; then
-    builtin cd $@
-    return $?
-fi
+    local i=0
+    for line in `tac ~/system_config/.cache/.dir_history`; do
+        match_line "$@" "$line"
+        if [ $? -eq 0 ]; then
+            output_line_array[$i]="$line"
+            let i++
+        fi
+    done
 
-choose_to_display_or_not
-if [[ $? -eq 0 ]]; then
-    display_output_line_array
-else
-    return 1
-fi
-cd_select_output_line
+    if test ${#output_line_array[@]} -eq 0; then
+        builtin cd $@
+        return $?
+    fi
+
+    choose_to_display_or_not
+    if [[ $? -eq 0 ]]; then
+        display_output_line_array
+    else
+        return 1
+    fi
+    cd_select_output_line
+}
+
+
+main "$@"

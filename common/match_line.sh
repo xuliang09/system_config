@@ -5,15 +5,24 @@
 # paras: para1 ... paran line
 # return: contains all-0 other-1
 function match_line() {
-    local para_idx=0
+    local para_idx=1
     local para_num=$#
     local select_output_line_para
+    local line="${!#}"
+    line=${line//\&/\\\&}
+    line=${line//\&/\\\&}
+    line=${line//\+/\\\+}
+
     for select_output_line_para in $@; do
         if [[ $para_idx -eq $para_num ]]; then
             break
         fi
+
+        select_output_line_para=${select_output_line_para//\?/\\\?}
         select_output_line_para=${select_output_line_para//\+/\\\+}
-        if [[ ! ${!#} =~ ${select_output_line_para} ]]; then
+        select_output_line_para=${select_output_line_para//\?/\\\?}
+
+        if [[ ! ${line} =~ ${select_output_line_para} ]]; then
             return 1
         fi
 

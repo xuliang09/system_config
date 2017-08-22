@@ -7,11 +7,7 @@ output_line_array=('https://www.bing.com/search?q=keyword'
 
 # return index of search engine in output_line_array
 function select_one_search_engine() {
-    local i
-    for((i=0; i<${#output_line_array[@]}; i++)); do
-        echo ${i}\) ${output_line_array[$i]}
-    done
-
+    display_output_line_array
     s_select_output_line
     return $?
 }
@@ -28,12 +24,7 @@ function s_select_output_line() {
     if [[ $select_output_line_ret -ge 0 && $select_output_line_ret -lt ${#output_line_array[@]} ]]; then
         return $select_output_line_ret
     elif [[ $select_output_line_ret -eq ${#output_line_array[@]} ]]; then
-        choose_to_display_or_not
-        if [[ $? -eq 0 ]]; then
-            display_output_line_array
-        else
-            return -1
-        fi
+        display_output_line_array
         s_select_output_line
     else
         echo 's: please check your input'
