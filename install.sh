@@ -40,7 +40,12 @@ function zsh_do() {
 }
 
 
-bash_do
+function main() {
+    bash_do
 
-sudo apt install xclip -y
-sudo apt install nautilus -y
+    sudo apt install xclip -y
+    sudo apt install nautilus -y
+}
+
+
+main

@@ -57,27 +57,38 @@ function install_spacemacs() {
 }
 
 
-bash_do
+function main() {
+    dir=`pwd`
 
-# vim
-sudo apt install vim
-install_vimrc
+    bash_do
 
-# emacs
-sudo apt install emacs
-install_spacemacs
+    # vim
+    sudo apt install vim
+    install_vimrc
 
-# software
-sudo apt install xclip -y
-sudo apt install nautilus -y
+    # emacs
+    sudo apt install emacs
+    install_spacemacs
 
-# python lib
-sudo apt install python-pip
-sudo pip install --upgrade pip
-sudo pip install flake8
-sudo pip install autoflake
-sudo pip install yapf
-# install pylookup
-cd ~/.emacs.d/layers/+lang/python/local/pylookup/
-chmod +x pylookup.py
-sudo make download
+    # software
+    sudo apt install xclip -y
+    sudo apt install nautilus -y
+
+    # config spacemacs
+    # python lib
+    sudo apt install python-pip
+    sudo pip install --upgrade pip
+    sudo pip install flake8
+    sudo pip install autoflake
+    sudo pip install yapf
+    # install pylookup
+    builtin cd ~/.emacs.d/layers/+lang/python/local/pylookup/
+    chmod +x pylookup.py
+    sudo make download
+
+    # cd back
+    builtin cd $dir
+}
+
+
+main
