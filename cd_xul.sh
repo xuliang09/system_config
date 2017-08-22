@@ -58,6 +58,7 @@ function main() {
     fi
 
     local i=0
+    local line
     for line in `tac ~/system_config/.cache/.dir_history`; do
         match_line "$@" "$line"
         if [ $? -eq 0 ]; then

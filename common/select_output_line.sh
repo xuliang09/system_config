@@ -92,7 +92,6 @@ function is_existed_in_array() {
 # description: if output_line_array is large, choose to display or not
 # paras:
 # return: display-0 other-1
-# TODO: this and re.sh
 function choose_to_display_or_not() {
     if test ${#output_line_array[@]} -gt 25; then
         echo -e "total found: ${#output_line_array[@]}, display all? (y/N) \c"
