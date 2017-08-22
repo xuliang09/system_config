@@ -5,7 +5,7 @@
 # paras: para1 ... paran line
 # return: contains all-0 other-1
 function match_line() {
-    local para_idx=1
+    local para_idx=0
     local para_num=$#
     local select_output_line_para
     for select_output_line_para in $@; do

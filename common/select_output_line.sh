@@ -8,7 +8,7 @@ declare -a output_line_array
 # paras: para
 # return: error-(-1) filtering-(size of output_line_array) selected-(index of output_line_array)
 function select_output_line() {
-    local select_output_line_para="$1"
+    local select_output_line_para="$@"
 
     if [[ "$select_output_line_para" == '' ]]; then
         select_output_line_para=0
