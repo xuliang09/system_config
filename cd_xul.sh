@@ -1,145 +1,79 @@
 #!/bin/bash
 
-. ~/system_config/escape_all_regex_char.sh
 
-save_dir_history()
-{
+function save_dir_history() {
     if test ! -e ~/system_config/.cache/.dir_history
     then
         touch ~/system_config/.cache/.dir_history
     fi
 
-    # no dup
-    dup_str=$1
-    dup_str=`escape_all_regex_char "$dup_str"`
+    local dup_str=`escape_all_regex_char "$1"`
     sed -i "/^${dup_str}$/d" ~/system_config/.cache/.dir_history
     echo "$1" >> ~/system_config/.cache/.dir_history
 }
 
 
-match_line()
-{
-    #echo $@
-    line=${!#}
-    for para in $@
-    do
-        para=${para//\+/\\\+}
-        if [[ ! $line =~ $para ]]
-        then
-            return 1
-        fi
-    done
-    return 0
-}
-
-
-isdigit()
-{
-    expr $1 + 1 &>/dev/null
-    return $?
-}
-
-
-select_output_line()
-{
+function cd_select_output_line() {
     echo -e "=> \c"
+    local select_number
     read select_number
 
-    #set -x
-    if [[ $select_number == '' ]]
-    then
-        select_number=0
-    fi
-    #set +x
+    select_output_line "$select_number"
+    local select_output_line_ret="$?"
 
-    output_line_array_num=${#output_line_array[@]}
-    isdigit $select_number
-    isdigit_state=$?
-    if [[ $isdigit_state -eq 0 && $select_number -lt $output_line_array_num ]]
-    then
-        builtin cd ${output_line_array[$select_number]}
+    if [[ $select_output_line_ret -ge 0 && $select_output_line_ret -lt ${#output_line_array[@]} ]]; then
+        builtin cd ${output_line_array[$select_output_line_ret]}
         save_dir_history `pwd`
-    elif [[ $isdigit_state -ne 0 ]]
-    then
-        #set -x
-        temp_output_line_array=()
-        i=0
-        for line in ${output_line_array[@]}
-        do
-            match_line $select_number $line
-
-            if [ $? -eq 0 ]
-            then
-                # add to array, output it
-                temp_output_line_array[i]=$line
-                echo $i\) $line
-                let i++
-            fi
-        done
-        output_line_array=("${temp_output_line_array[@]}")
-        if test ${#output_line_array[@]} -eq 0
-        then
-            echo 'cd: found no path'
-            return 0
-        elif test ${#output_line_array[@]} -eq 1
-    then
-        builtin cd "${output_line_array[0]}"
-        return 0
+    elif [[ $select_output_line_ret -eq ${#output_line_array[@]} ]]; then
+        choose_to_display_or_not
+        if [[ $? -eq 0 ]]; then
+            display_output_line_array
+        else
+            return 1
         fi
-        #set +x
-        select_output_line
-    elif [[ $select_number -ge $output_line_array_num ]]
-    then
-        echo 'input incorrect!'
+        cd_select_output_line
     else
-        echo 'select_output_line unexcepted case'
+        echo 'cd_xul: please check your input'
     fi
 }
 
 
-cmd_para_num="$#"
 output_line_array=()
 
-if [ $cmd_para_num -eq 0 ]
-then
+if [ $# -eq 0 ]; then
     builtin cd ~
     return 0
-elif [ $cmd_para_num -eq 1 ]
-then
-    if test -e $1
-    then
+elif [ $# -eq 1 ]; then
+    if test -e $1; then
         builtin cd $1
         save_dir_history `pwd`
         return 0
     fi
 fi
 
-i=0
-
 if test ! -e ~/system_config/.cache/.dir_history; then
     builtin cd $@
     return $?
 fi
 
-for line in `tac ~/system_config/.cache/.dir_history`
-do
-    match_line $@ $line
-    if [ $? -eq 0 ]
-    then
-        # add to array, output it
-        output_line_array[i]=$line
-        echo $i\) $line
+i=0
+for line in `tac ~/system_config/.cache/.dir_history`; do
+    match_line "$@" "$line"
+    if [ $? -eq 0 ]; then
+        output_line_array[$i]="$line"
         let i++
     fi
 done
 
-if test ${#output_line_array[@]} -eq 0
-then
+if test ${#output_line_array[@]} -eq 0; then
     builtin cd $@
     return $?
 fi
 
-#set -x
-select_output_line
-#set +x
-
+choose_to_display_or_not
+if [[ $? -eq 0 ]]; then
+    display_output_line_array
+else
+    return 1
+fi
+cd_select_output_line
