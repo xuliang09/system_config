@@ -12,13 +12,8 @@ function match_line() {
         if [[ $para_idx -eq $para_num ]]; then
             break
         fi
-        # echo "$select_output_line_para"
-        # expr match "${!#}" ".*${para}" &>/dev/null
-        # echo "${!#}" | grep -q "${select_output_line_para}"
-        # if [[ $? -ne 0 ]]; then
-        #     return 1
-        # fi
-        if [[ ! ${!#} =~ ${para} ]]; then
+        select_output_line_para=${select_output_line_para//\+/\\\+}
+        if [[ ! ${!#} =~ ${select_output_line_para} ]]; then
             return 1
         fi
 
