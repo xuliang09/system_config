@@ -11,6 +11,7 @@ alias of='. ~/system_config/of.sh'
 alias putclip='. ~/system_config/putclip.sh'
 alias up='. ~/system_config/up.sh'
 alias s='. ~/system_config/s.sh'
+alias e='emacsclient'
 
 alias gst='git status'
 alias gad='git add'
@@ -22,5 +23,3 @@ alias gdf='git diff'
 # update bash history immediately
 shopt -s histappend
 PROMPT_COMMAND="history -a;$PROMPT_COMMAND"
-
-
