@@ -45,7 +45,10 @@ function main() {
         builtin cd ~
         return 0
     elif [ $# -eq 1 ]; then
-        if test -e $1; then
+        if [[ "$1" == '-' ]]; then
+            builtin cd -
+            return 0
+        elif test -e $1; then
             builtin cd $1
             save_dir_history `pwd`
             return 0
