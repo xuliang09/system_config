@@ -73,6 +73,7 @@ function main() {
     # software
     sudo apt install xclip -y
     sudo apt install nautilus -y
+    sudo apt install silversearcher-ag
 
     # config spacemacs
     # python lib
