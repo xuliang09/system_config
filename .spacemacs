@@ -31,6 +31,7 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
+     markdown
      c-c++
      java
      python
@@ -315,6 +316,7 @@ explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
   ;; (setq-default indent-tabs-mode nil)
   (setq-default default-tab-width 4)
+  ()
   )
 
 ;; Do not write anything past this comment. This is where Emacs will

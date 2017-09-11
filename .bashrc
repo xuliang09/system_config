@@ -12,6 +12,8 @@ alias putclip='. ~/system_config/putclip.sh'
 alias up='. ~/system_config/up.sh'
 alias s='. ~/system_config/s.sh'
 alias e='. ~/system_config/e.sh'
+alias rm='. ~/system_config/trash.sh'
+alias rmi='/bin/rm'
 
 alias gst='git status'
 alias gad='git add'
