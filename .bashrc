@@ -22,6 +22,8 @@ alias gco='git checkout'
 alias gdf='git diff'
 
 
+PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]|\d \t\n\$ '
+
 # update bash history immediately
 shopt -s histappend
 PROMPT_COMMAND="history -a;$PROMPT_COMMAND"
