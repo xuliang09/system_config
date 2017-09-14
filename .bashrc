@@ -31,3 +31,7 @@ PROMPT_COMMAND="history -a;$PROMPT_COMMAND"
 # enhanced up and down arrow to see command history
 bind '"\e[A": history-search-backward'
 bind '"\e[B": history-search-forward'
+
+JAVA_HOME=/home/xul/software/jdk1.8.0_144
+CLASSPATH=.:$JAVA_HOME/lib.tools.jar
+PATH=$JAVA_HOME/bin:$PATH

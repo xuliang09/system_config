@@ -63,21 +63,21 @@ function main() {
     bash_do
 
     # vim
-    sudo apt install vim
+    sudo apt install vim -y
     install_vimrc
 
     # emacs
-    sudo apt install emacs
+    sudo apt install emacs -y
     install_spacemacs
 
     # software
     sudo apt install xclip -y
     sudo apt install nautilus -y
-    sudo apt install silversearcher-ag
+    sudo apt install silversearcher-ag -y
 
     # config spacemacs
     # python lib
-    sudo apt install python-pip
+    sudo apt install python-pip -y
     sudo pip install --upgrade pip
     sudo pip install flake8
     sudo pip install autoflake
