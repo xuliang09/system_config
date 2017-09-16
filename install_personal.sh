@@ -74,6 +74,7 @@ function main() {
     sudo apt install xclip -y
     sudo apt install nautilus -y
     sudo apt install silversearcher-ag -y
+    sudo apt install mongodb-clients -y
 
     # config spacemacs
     # python lib
