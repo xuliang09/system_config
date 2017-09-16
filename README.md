@@ -8,7 +8,7 @@
 1. cd ~
 2. git clone https://github.com/PowerfulSpider/system_config.git
 3. cd system_config
-4. sudo ./intall.sh
+4. ./intall.sh
 5. source ~/.bashrc
   </br>
 
