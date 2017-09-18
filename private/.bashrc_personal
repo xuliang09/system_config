@@ -1,0 +1,3 @@
+JAVA_HOME=/home/xul/software/jdk1.8.0_144
+CLASSPATH=.:$JAVA_HOME/lib.tools.jar
+PATH=$JAVA_HOME/bin:$PATH

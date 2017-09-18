@@ -22,6 +22,7 @@ function bash_do() {
     grep '\. ~/system_config/\.bashrc' ~/.bashrc &>/dev/null
     if test $? -ne 0; then
         echo '. ~/system_config/.bashrc' >> ~/.bashrc
+        echo '. ~/system_config/private/.bashrc_personal' >> ~/.bashrc
         . ~/.bashrc
     fi
 }
