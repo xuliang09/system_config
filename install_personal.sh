@@ -76,6 +76,9 @@ function main() {
     sudo apt install nautilus -y
     sudo apt install silversearcher-ag -y
     sudo apt install mongodb-clients -y
+    sudo apt-get install ntpdate -y
+    sudo ntpdate time.windows.com -y
+    sudo hwclock --localtime --systohc
 
     # config spacemacs
     # python lib
